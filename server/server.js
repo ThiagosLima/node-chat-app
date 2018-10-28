@@ -14,6 +14,16 @@ app.use(epxress.static(publicPath))
 io.on('connection', (socket) => {
   console.log('New user connected.')
 
+  socket.emit('newMessage', {
+    from: 'grasi',
+    text: 'olá, kkkkk',
+    creatAt: new Date().toJSON().slice(0,10).replace(/-/g,'/')
+  })
+
+  socket.on('createMessage', (message) => {
+    console.log('createMessage', message)
+  })
+
   socket.on('disconnect', () => {
     console.log('A user was disconnected.')
   })
